@@ -1,0 +1,184 @@
+<!-- 续租工位模块开始 -->
+<div class="col-sm-12" ng-if="clauseItem.selectedStandardClause.id == 2">
+	<table class="table table-hover dataTable table-striped xkd-standard-clause-bill-table" ng-repeat="conditionItem in clauseItem.conditionArr track by $index" style="margin-bottom: 0">
+		<tr>
+			<td colspan="8">
+				续租工位编号：{{conditionItem.continueSeatNumber}}<button type="button" class="btn btn-sm btn-success pull-right" ng-click="addClauseProduct(clauseItem,conditionItem,$index)">选择工位</button>
+			</td>
+		</tr>
+		<tr ng-show="$index==0">
+			<td width="10%">类型</td>
+			<td width="20%">开始时间</td>
+			<td width="20%">结束时间</td>
+			<td width="10%">续租工位数</td>
+			<td width="10%">续租工位签约价</td>
+			<td width="10%">原工位签约价</td>
+			<td width="10%">原工位现签约价</td>
+			<td width="10%">操作</td>
+		</tr>
+		<tr>
+			<td width="10%">{{clauseItem.selectedStandardClause.text}}</td>
+			<td width="20%">
+				<div class="btn-group">
+					<div class="input-group date form_date" ui-jq="datetimepicker" ui-options="{
+						format: 'yyyy-mm-dd',
+						language: 'zh-CN',
+						todayBtn: 1,
+						autoclose: 1,
+						startView: 2,
+						minView: 2,
+						pickerPosition: 'top-left'
+						}">
+						<!-- <input type="text" class="form-control"  placeholder="开始时间" readonly ng-model="conditionItem.start_time"/> -->
+						<input type="text" class="form-control"  placeholder="开始时间" readonly ng-model="contract.end_time"/>
+						
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+					</div>
+				</div>
+			</td>
+			<td width="20%">
+				<div class="btn-group">
+					<div class="input-group date form_date" ui-jq="datetimepicker" ui-options="{
+						format: 'yyyy-mm-dd',
+						language: 'zh-CN',
+						todayBtn: 1,
+						autoclose: 1,
+						startView: 2,
+						minView: 2,
+						pickerPosition: 'top-left'
+						}">
+						<input type="text" class="form-control"  placeholder="结束时间" readonly ng-model="conditionItem.end_time"/>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+					</div>
+				</div>
+			</td>
+			<td width="10%"><input class="editable-input form-control input-sm xkd-standard-clause-bill" ng-model="conditionItem.continue_seat_number"></td>
+			<td width="10%"><input class="editable-input form-control input-sm xkd-standard-clause-bill" ng-model="conditionItem.continue_seat_price"></td>
+			<td width="10%"><input class="editable-input form-control input-sm xkd-standard-clause-bill" ng-model="conditionItem.original_seat_price"></td>
+			<td width="10%"><input class="editable-input form-control input-sm xkd-standard-clause-bill" ng-model="conditionItem.previous_seat_price_continue"></td>
+			<td width="10%"><button type="button" class="btn btn-sm btn-primary" ng-click="deleteOneRow(clauseItem.conditionArr, $index)">删除</button></td>
+		</tr>
+	</table>
+	<!-- <table class="table table-striped b-t m-b m-t b-light" ng-show="isSureAddOne">
+		<tbody>
+			<tr class="xkd-bill-tr">
+				<td class="text-center">付款结点内容</td>
+				<td class="text-center">起始日期</td>
+				<td class="text-center">截止日期</td>
+				<td class="text-center">金额</td>
+				<td class="text-center">合计</td>
+			</tr>
+			<tr ng-repeat="item1 in continuePayItem track by $index" class="xkd-bill-tr">
+				<td class="text-center"><input type="text" ng-model="item1.charge_content" class="contract-input-no-border text-center"></td>
+				<td class="text-center"><input type="text" ng-model="item1.start_date" class="contract-input-no-border text-center"></td>
+				<td class="text-center"><input type="text" ng-model="item1.end_date" class="contract-input-no-border text-center"></td>
+				<td class="text-center"><input type="text" ng-model="item1.value" class="contract-input-no-border text-center"></td>
+				<td class="text-center"><input type="text" ng-model="item1.value" class="contract-input-no-border text-center"></td>
+			</tr>
+		</tbody>
+	</table> -->
+	<div class="row">
+		<div class="col-sm-12 m-b">
+			<button type="button" class="btn btn-sm btn-primary" ng-click="addOneRow(clauseItem.conditionArr,clauseItem)">新增一项</button>
+		</div>
+	</div>
+</div>
+<!-- 续租工位模块结束 -->
+<!-- 减租开始 -->
+<div class="col-sm-12 m-b" ng-if="clauseItem.selectedStandardClause.id == 3">
+	<table class="table table-hover dataTable table-striped xkd-standard-clause-bill-table" ng-repeat="conditionItem in clauseItem.conditionArr track by $index">
+		<tr>
+			<td width="7%">类型</td>
+			<td width="17%">开始时间</td>
+			<td width="17%">结束时间</td>
+			<td width="10%">减少工位数</td>
+			<td width="10%">减少工位编号</td>
+			<td width="16%">保证金扣除比例（%）</td>
+			<td width="10%">原工位签约价</td>
+			<td width="10%">原工位现签约价</td>
+			<td width="7%">操作</td>
+		</tr>
+		<tr>
+			<td>{{clauseItem.selectedStandardClause.text}}</td>
+			<td>
+				<div class="btn-group">
+					<div class="input-group date form_date" ui-jq="datetimepicker" ui-options="{
+						format: 'yyyy-mm-dd',
+						language: 'zh-CN',
+						todayBtn: 1,
+						autoclose: 1,
+						startView: 2,
+						minView: 2,
+						pickerPosition: 'top-left'
+						}">
+						<input type="text" class="form-control"  placeholder="开始时间" readonly ng-change="calInitialPrice(conditionItem)" ng-model="conditionItem.start_date_string"/>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="btn-group">
+					<div class="input-group date form_date" ui-jq="datetimepicker" ui-options="{
+						format: 'yyyy-mm-dd',
+						language: 'zh-CN',
+						todayBtn: 1,
+						autoclose: 1,
+						startView: 2,
+						minView: 2,
+						pickerPosition: 'top-left'
+						}">
+						<input type="text" class="form-control"  placeholder="结束时间" readonly ng-change="calInitialPrice(conditionItem)" ng-model="conditionItem.end_date_string"/>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+					</div>
+				</div>
+			</td>
+			<td><input  type="number"class="editable-input form-control input-sm xkd-standard-clause-bill" ng-change="calSecurityPercent(conditionItem)" ng-model="conditionItem.reduceNumber"></td>
+			<td>
+				<multiselect ng-model="conditionItem.reduceMultiSeat" options="c.product_serialize for c in contract.con_products" data-multiple="true" scroll-after-rows="5" filter-after-rows="5" tabindex="-1"></multiselect>
+			</td>
+			<td>
+				<input type="number" class="editable-input form-control input-sm xkd-standard-clause-bill xkd-agreement-security" readonly ng-model="conditionItem.securityPercent">
+				<input type="number" class="editable-input form-control input-sm xkd-standard-clause-bill xkd-agreement-security" ng-model="conditionItem.securityPercentCustom">
+			</td>
+			<td>
+				<input class="editable-input form-control input-sm xkd-standard-clause-bill" readonly ng-model="conditionItem.initalPrice">
+			</td>
+			<td>
+				<input class="editable-input form-control input-sm xkd-standard-clause-bill" ng-model="conditionItem.currentPrice">
+			</td>
+			<td>
+				<button type="button" class="btn btn-sm btn-primary" ng-click="deleteOneRow(clauseItem.conditionArr, $index)">删除</button>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="10">
+				减租工位编号：
+				<span ng-repeat="seat in conditionItem.reduceMultiSeat">&nbsp;{{seat.product_serialize}}</span>
+			</td>
+		</tr>
+	</table>
+	<!-- <table class="table table-striped b-t m-b m-t b-light">
+		<tbody>
+			<tr class="xkd-bill-tr" ng-if="clauseItem.bill.modifiedPrice != null">
+				<td class="text-center">付款结点内容</td>
+				<td class="text-center">起始日期</td>
+				<td class="text-center">截止日期</td>
+				<td class="text-center">金额</td>
+				<td class="text-center">合计</td>
+			</tr>
+			<tr ng-repeat="item1 in clauseItem.bill.modifiedPrice track by $index" class="xkd-bill-tr">
+				<td class="text-center"><input type="text" ng-model="item1.charge_content" class="contract-input-no-border text-center"></td>
+				<td class="text-center"><input type="text" ng-model="item1.start_date" class="contract-input-no-border text-center"></td>
+				<td class="text-center"><input type="text" ng-model="item1.end_date" class="contract-input-no-border text-center"></td>
+				<td class="text-center"><input type="text" ng-model="item1.price" class="contract-input-no-border text-center"></td>
+				<td class="text-center"><input type="text" ng-model="item1.price" class="contract-input-no-border text-center"></td>
+			</tr>
+		</tbody>
+	</table> -->
+	<div class="row">
+		<div class="col-sm-12 m-b">
+			<button type="button" class="btn btn-sm btn-primary" ng-click="addOneRow(clauseItem.conditionArr)">新增一项</button>
+		</div>
+	</div>
+</div>
+<!-- 减租结束 -->
