@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		function Animal() {
+		}
+
+		Animal.prototype.species = "动物";
+
+
+		function Cat(name, color) {
+			this.name = name;
+			this.color = color;
+		}
+
+		var F = function(){};
+
+		F.prototype = Animal.prototype;
+
+		Cat.prototype = new F();
+
+		Cat.prototype = Animal.prototype;
+
+		console.log("Cat 的constructor 变为 Animal 的" + (Cat.prototype.constructor == Animal).toString());
+		console.log("Cat 的constructor 是 Cat 的" + (Cat.prototype.constructor == Cat).toString());
+
+		Cat.prototype.constructor = Cat;
+
+		console.log("Cat 的constructor 变为 Animal 的" + (Cat.prototype.constructor == Animal).toString());
+		console.log("Cat 的constructor 是 Cat 的" + (Cat.prototype.constructor == Cat).toString());
+
+		console.log("Animal 的constructor 变为 Animal 的" + (Animal.prototype.constructor == Animal).toString());
+		console.log("Animal 的constructor 是 Cat 的" + (Animal.prototype.constructor == Cat).toString());
+		
+		Cat.prototype.species = "动物1";
+
+		var cat1 = new Cat('大毛','黄色');
+
+		var animal1 = new Animal();
+
+		console.log(cat1);
+		console.log(animal1);
+
+	</script>
+
+</body>
+</html>
