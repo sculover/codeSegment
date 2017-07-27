@@ -1,0 +1,85 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button>
+	<h3 class="modal-title">机构认证</h3>
+</div>
+<div class="modal-body">
+	<form class="form-validation form-horizontal">
+		<div class="form-group">
+			<label class="col-sm-3 control-label text-right">机构名称<span class="text-danger">*</span></label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control b-b" ng-model="orgAuthShowInfo.org_name" placeholder='必填项' disabled="true" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label text-right">机构类型<span class="text-danger">*</span></label>
+			<div class="col-sm-8">
+				<select class="form-control xkd-select-style inline_block" ng-model="orgAuthShowInfo.inst_type" disabled="true">
+					<option ng-repeat="item in mechanismTypeDatas" value="{{item.id}}">{{item.name}}</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<label class="col-sm-3 control-label text-right">实际办公地址</label>
+			<div class="col-sm-9 selectSimpleModel" id="selectSimpleModel2">
+				<a select-address-all select-item = "2" class="btn btn-default">选择区域</a>
+				<span ng-repeat="add in addressData">{{add.n}}</span>
+				<!-- <span class="fa fa-times" ng-click="delAdd()" ng-if="addressData.length>0"></span> -->
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label text-right">详细办公地址<span class="text-danger">*</span></label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control b-b" ng-model="orgAuthShowInfo.address" placeholder='必填项(100字符以内)' maxlength="100" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label text-right">团队人数<span class="text-danger">*</span></label>
+			<div class="col-sm-8">
+				<input type="number" class="form-control b-b" ng-model="orgAuthShowInfo.team_num" placeholder='必填项(15位数字以内)' maxlength="15" />
+			</div>
+		</div>
+		<!-- 负责人开始 -->
+		<div class="form-group">
+			<label class="col-sm-3 control-label text-right">负责人<span class="text-danger">*</span></label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control b-b" ng-model="orgAuthShowInfo.res_person" placeholder='必填项(20个字以内)' maxlength="20" />
+			</div>
+		</div>
+		<!-- 负责人结束 -->
+		<!-- 负责人联系电话开始 -->
+		<div class="form-group">
+			<label class="col-sm-3 control-label text-right">负责人联系电话<span class="text-danger">*</span></label>
+			<div class="col-sm-8">
+				<input number-only type="text" class="form-control b-b" ng-model="orgAuthShowInfo.res_person_phone" placeholder='必填项(20位数字以内)' maxlength="20" />
+			</div>
+		</div>
+		<!-- 负责人联系电话结束 -->
+		<div class="form-group">
+			<label class="col-sm-3 control-label text-right">产品业务信息<span class="text-danger">*</span></label>
+			<div class="col-sm-8">
+				<!-- <input type="text" class="form-control b-b" ng-model="orgAuthShowInfo.business_area" placeholder='必填项' /> -->
+				<textarea rows="5" ng-model="orgAuthShowInfo.business_area" class="form-control" placeholder="必填项(500字符以内)" maxlength="500"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label text-right">业务覆盖地域<span class="text-danger">*</span></label>
+			<div class="col-sm-8">
+				<div class="pull-left p-r selectSimpleModel" style="width:700px;" id="selectModel2">
+					<a select-address-mutiple select-item = "'2'" class="btn btn-default">选择地域</a>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label text-right"></label>
+			<div class="col-sm-8">
+					<span class="m-r-xs inline m-t-sm" style="padding:1px 10px;background:#5cb85c;font-weight:bold;color:#fff;border-radius:4px;" ng-repeat="add in authAddressData track by $index" class="m-r-xs">{{add}}
+						<span class="fa fa-times" ng-click="delArea(authAddressData,$index,2)" ng-if="authAddressData.length>0"></span>
+					</span>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-blue" ng-click="isNotice(orgAuthShowInfo.num)" ng-disabled="saveButtenDisabled">提交审核</button>
+	<button class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+</div>
