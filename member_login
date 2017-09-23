@@ -1,0 +1,25 @@
+ajaxReturn({
+		type: 'POST',
+		url: '/member_auth/role/set_role',
+		data: {
+			org_id: role.org_id,
+			role_id: role.role_id
+		}
+	}, function(response){
+		$(".loading").fadeOut();
+		if (response.statuscode != CODE_SUCCESS) {
+			return;
+		} else {
+			var appLocalStorage = require('localStorage');
+			// 1 设置member_role_info.该对象用于保存用户当前公司和角色类型.
+			appLocalStorage.set('member_role_info',role);
+			// 设置已登录session. 用于判断客户是新开浏览器还是刷新页面
+			var appSessionStorage = require('sessionStorage');
+			appSessionStorage.set('qifu_login',1);
+			// 设置右上角角色名称显示
+			var header = require('application:widget/header/header');
+			header.setRole(role.org_name+''+role.role_name);
+			// 隐藏选择角色窗口
+			$(pageDom).hide();
+		}
+	});
