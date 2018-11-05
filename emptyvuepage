@@ -1,0 +1,29 @@
+<template>
+    <div>
+        
+    </div>
+</template>
+<script>
+export default {
+    methods: {
+        _getBreadcrumb() {
+            this.$store.commit("setBreadcrumb", [
+                {
+                    icon: 'fa fa-desktop',
+                    title: '运营台'
+                },{
+                    title: '房源管理'
+                }
+            ]);
+        }
+    },
+    created() {
+        this._getBreadcrumb();
+    }
+}
+</script>
+<style lang="less" scoped>
+
+</style>
+
+
